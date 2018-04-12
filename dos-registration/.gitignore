@@ -1,0 +1,6 @@
+.DS_Store
+
+# Ignore IntelliJ files
+.idea/
+*.idea
+*.iml
