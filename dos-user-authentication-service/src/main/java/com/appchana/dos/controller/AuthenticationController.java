@@ -1,4 +1,4 @@
-package com.appchana.dos.controllers;
+package com.appchana.dos.controller;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
