@@ -39,7 +39,6 @@ public class UserRacquet {
     @GeneratedValue
     @Column(name = "user_racquet_id")
     public Long getUserRacquetId() { return userRacquetId; }
-
     public void setUserRacquetId(Long userRacquetId) { this.userRacquetId = userRacquetId; }
 
 
@@ -49,7 +48,6 @@ public class UserRacquet {
     public ZonedDateTime getDateCreated() {
         return dateCreated;
     }
-
     public void setDateCreated(ZonedDateTime dateCreated) {
         this.dateCreated = dateCreated;
     }
@@ -59,7 +57,6 @@ public class UserRacquet {
     public Boolean getDeleted() {
         return deleted;
     }
-
     public void setDeleted(Boolean deleted) {
         this.deleted = deleted;
     }
@@ -67,7 +64,6 @@ public class UserRacquet {
     public String getPicture01() {
         return picture01;
     }
-
     public void setPicture01(String picture01) {
         this.picture01 = picture01;
     }
@@ -76,7 +72,6 @@ public class UserRacquet {
     public String getPicture02() {
         return picture02;
     }
-
     public void setPicture02(String picture02) {
         this.picture02 = picture02;
     }
@@ -85,7 +80,6 @@ public class UserRacquet {
     public String getPicture03() {
         return picture03;
     }
-
     public void setPicture03(String picture03) {
         this.picture03 = picture03;
     }
@@ -98,7 +92,6 @@ public class UserRacquet {
     public User getUser() {
         return this.user;
     }
-
     public void setUser(User user) {
         this.user = user;
     }
@@ -111,7 +104,6 @@ public class UserRacquet {
     public Racquet getRacquet() {
         return racquet;
     }
-
     public void setRacquet(Racquet racquet) {
         this.racquet = racquet;
     }

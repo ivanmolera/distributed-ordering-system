@@ -5,16 +5,40 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.service.ApiInfo;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * Created by ivanmolera on 12/04/2018.
  */
+@EnableSwagger2
 @SpringBootApplication
 public class UserApplication {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public Docket docket()
+    {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .select()
+                .apis(RequestHandlerSelectors.basePackage(getClass().getPackage().getName()))
+                .paths(PathSelectors.any())
+                .build()
+                .apiInfo(generateApiInfo());
+    }
+
+    private ApiInfo generateApiInfo()
+    {
+        return new ApiInfo("User Service API", "API to manage Users", "Version 1.0 - mw",
+                "urn:tos", "ivan.molera@gmail.com", "Apache 2.0", "http://www.apache.org/licenses/LICENSE-2.0");
     }
 
     public static void main(String[] args) {

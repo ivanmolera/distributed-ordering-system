@@ -27,6 +27,9 @@ public class User
     private Boolean deleted = false;
     private OnlineStatus onlineStatus;
 
+    @OneToOne()
+    private Contact contact;
+
     private List<UserRacquet> userRacquets = new ArrayList<UserRacquet>();
 
     private User()
@@ -98,6 +101,17 @@ public class User
     public void setOnlineStatus(OnlineStatus onlineStatus)
     {
         this.onlineStatus = onlineStatus;
+    }
+
+
+    //@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    public Contact getContact() {
+        return contact;
+    }
+    public void setContact(Contact contact) {
+        this.contact = contact;
     }
 
 

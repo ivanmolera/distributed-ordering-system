@@ -1,15 +1,28 @@
 package com.appchana.dos.dao.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
 /**
  * Created by ivanmolera on 12/04/2018.
  */
+@Entity
+@Table(name = "contacts")
 public class Contact {
+    private Long contactId;
     private String country;
     private String region;
     private String city;
     private String postalCode;
     private String address;
     private String phone;
+
+    private User user;
+
+    public Contact() {
+    }
 
     public Contact(String country, String region, String city, String postalCode, String address, String phone) {
         this.country = country;
@@ -19,6 +32,17 @@ public class Contact {
         this.address = address;
         this.phone = phone;
     }
+
+    @Id
+    @GeneratedValue
+    @Column(name = "contact_id")
+    public Long getContactId() {
+        return contactId;
+    }
+    public void setContactId(Long contactId) {
+        this.contactId = contactId;
+    }
+
 
     public String getCountry() {
         return country;
@@ -65,5 +89,18 @@ public class Contact {
     }
     public String getPhone(){
         return this.phone;
+    }
+
+
+    //@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    //@JoinColumn(name = "user_id", nullable = false)
+    //@NotNull(message = "UserId can not be null!")
+    @JsonIgnore
+    @OneToOne(mappedBy = "contact")
+    public User getUser() {
+        return user;
+    }
+    public void setUser(User user) {
+        this.user = user;
     }
 }

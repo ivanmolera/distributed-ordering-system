@@ -1,9 +1,11 @@
 package com.appchana.dos.controller;
 
+import com.appchana.dos.controller.mapper.ContactMapper;
 import com.appchana.dos.controller.mapper.UserMapper;
 import com.appchana.dos.controller.mapper.UserRacquetMapper;
 import com.appchana.dos.dao.model.User;
 import com.appchana.dos.domainvalue.OnlineStatus;
+import com.appchana.dos.dto.ContactDTO;
 import com.appchana.dos.dto.UserDTO;
 import com.appchana.dos.dto.UserRacquetDTO;
 import com.appchana.dos.exception.ConstraintsViolationException;
@@ -39,7 +41,7 @@ public class UserController
         return UserMapper.makeUserDTO(userService.find(userId));
     }
 
-    @GetMapping("/{userId}/books")
+    @GetMapping("/{userId}/racquets")
     public List<UserRacquetDTO> getUserRacquets(@Valid @PathVariable long userId) throws EntityNotFoundException
     {
         User user = userService.find(userId);
@@ -51,6 +53,7 @@ public class UserController
     public UserDTO createUser(@Valid @RequestBody UserDTO userDTO) throws ConstraintsViolationException
     {
         User user = UserMapper.makeUser(userDTO);
+        user.setContact(ContactMapper.makeContact(userDTO.getContact()));
         return UserMapper.makeUserDTO(userService.create(user));
     }
 
