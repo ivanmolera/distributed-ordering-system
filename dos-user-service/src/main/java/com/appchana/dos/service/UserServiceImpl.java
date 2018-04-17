@@ -109,9 +109,9 @@ public class UserServiceImpl implements UserService
      * @param onlineStatus
      */
     @Override
-    public List<User> find(OnlineStatus onlineStatus)
+    public List<User> find(OnlineStatus onlineStatus, Boolean deleted)
     {
-        return userRepository.findByOnlineStatus(onlineStatus);
+        return userRepository.findByOnlineStatusAndDeleted(onlineStatus, deleted);
     }
 
 

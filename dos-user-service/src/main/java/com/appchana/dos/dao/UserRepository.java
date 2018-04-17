@@ -12,7 +12,7 @@ import java.util.List;
 public interface UserRepository extends CrudRepository<User, Long>
 {
 
-    List<User> findByOnlineStatus(OnlineStatus onlineStatus);
+    List<User> findByOnlineStatusAndDeleted(OnlineStatus onlineStatus, Boolean deleted);
 
     User findByUsername(String username);
 }

@@ -56,13 +56,11 @@ public class UserController
         return UserMapper.makeUserDTO(userService.create(user));
     }
 
-
     @GetMapping("activate/{userId}")
     public void activateUser(@Valid @PathVariable long userId) throws EntityNotFoundException
     {
         userService.activate(userId);
     }
-
 
     @DeleteMapping("/{userId}")
     public void deleteUser(@Valid @PathVariable long userId) throws EntityNotFoundException
@@ -70,11 +68,9 @@ public class UserController
         userService.delete(userId);
     }
 
-
     @GetMapping
-    public List<UserDTO> findUsers(@RequestParam OnlineStatus onlineStatus)
-            throws ConstraintsViolationException, EntityNotFoundException
+    public List<UserDTO> findUsers(@RequestParam OnlineStatus onlineStatus, @RequestParam Boolean deleted) throws ConstraintsViolationException, EntityNotFoundException
     {
-        return UserMapper.makeUserDTOList(userService.find(onlineStatus));
+        return UserMapper.makeUserDTOList(userService.find(onlineStatus, deleted));
     }
 }

@@ -20,5 +20,5 @@ public interface UserService  {
 
     public void activate(Long userId) throws EntityNotFoundException;
 
-    public List<User> find(OnlineStatus onlineStatus);
+    public List<User> find(OnlineStatus onlineStatus, Boolean deleted);
 }
