@@ -57,6 +57,13 @@ public class UserController
     }
 
 
+    @GetMapping("activate/{userId}")
+    public void activateUser(@Valid @PathVariable long userId) throws EntityNotFoundException
+    {
+        userService.activate(userId);
+    }
+
+
     @DeleteMapping("/{userId}")
     public void deleteUser(@Valid @PathVariable long userId) throws EntityNotFoundException
     {

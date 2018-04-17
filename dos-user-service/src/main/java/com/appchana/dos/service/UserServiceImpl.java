@@ -89,6 +89,21 @@ public class UserServiceImpl implements UserService
 
 
     /**
+     * Activates an existing user by id.
+     *
+     * @param userId
+     * @throws EntityNotFoundException if no user with the given id was found.
+     */
+    @Override
+    @Transactional
+    public void activate(Long userId) throws EntityNotFoundException
+    {
+        User user = findUserChecked(userId);
+        user.setDeleted(false);
+    }
+
+
+    /**
      * Find all users by online state.
      *
      * @param onlineStatus

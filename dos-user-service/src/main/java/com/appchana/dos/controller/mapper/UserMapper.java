@@ -24,6 +24,7 @@ public class UserMapper
                 .setUserId(user.getUserId())
                 .setPassword(user.getPassword())
                 .setUsername(user.getUsername())
+                .setDeleted(user.getDeleted())
                 .setContact(user.getUserContact());
 
         return userDTOBuilder.createUserDTO();

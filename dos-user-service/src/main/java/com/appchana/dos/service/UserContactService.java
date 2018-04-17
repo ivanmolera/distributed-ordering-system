@@ -9,9 +9,9 @@ import com.appchana.dos.exception.EntityNotFoundException;
  */
 public interface UserContactService {
 
-    UserContact find(Long userContactId) throws EntityNotFoundException;
+    public UserContact find(Long userContactId) throws EntityNotFoundException;
 
-    UserContact create(UserContact userContact) throws ConstraintsViolationException;
+    public UserContact create(UserContact userContact) throws ConstraintsViolationException;
 
-    void delete(Long userContactId) throws EntityNotFoundException;
+    public void delete(Long userContactId) throws EntityNotFoundException;
 }

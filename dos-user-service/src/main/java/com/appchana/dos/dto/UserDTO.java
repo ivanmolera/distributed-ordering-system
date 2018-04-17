@@ -3,6 +3,7 @@ package com.appchana.dos.dto;
 import com.appchana.dos.controller.mapper.UserContactMapper;
 import com.appchana.dos.dao.model.UserContact;
 import com.appchana.dos.domainvalue.OnlineStatus;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.validation.constraints.NotNull;
@@ -16,6 +17,7 @@ public class UserDTO {
     private Long userId;
     private String username;
     private String password;
+    private Boolean deleted;
     private OnlineStatus onlineStatus;
     private UserContactDTO contact;
 
@@ -25,10 +27,11 @@ public class UserDTO {
     }
 
 
-    private UserDTO(Long userId, String username, String password, OnlineStatus onlineStatus, UserContactDTO contact, List<Long> racquets) {
+    private UserDTO(Long userId, String username, String password, OnlineStatus onlineStatus, Boolean deleted, UserContactDTO contact, List<Long> racquets) {
         this.userId = userId;
         this.username = username;
         this.password = password;
+        this.deleted = deleted;
         this.onlineStatus = onlineStatus;
         this.contact = contact;
         this.racquets = racquets;
@@ -55,6 +58,10 @@ public class UserDTO {
         return password;
     }
 
+    public Boolean getDeleted() {
+        return deleted;
+    }
+
     public OnlineStatus getOnlineStatus() {
         return onlineStatus;
     }
@@ -71,6 +78,7 @@ public class UserDTO {
         private Long userId;
         private String username;
         private String password;
+        private Boolean deleted;
         private OnlineStatus onlineStatus;
         private UserContactDTO contact;
         private List<Long> racquets;
@@ -94,6 +102,12 @@ public class UserDTO {
         }
 
 
+        public UserDTOBuilder setDeleted(Boolean deleted) {
+            this.deleted = deleted;
+            return this;
+        }
+
+
         public UserDTOBuilder setOnlineStatus(OnlineStatus onlineStatus) {
             this.onlineStatus = onlineStatus;
             return this;
@@ -113,7 +127,7 @@ public class UserDTO {
 
 
         public UserDTO createUserDTO() {
-            return new UserDTO(userId, username, password, onlineStatus, contact, racquets);
+            return new UserDTO(userId, username, password, onlineStatus, deleted, contact, racquets);
         }
 
     }
