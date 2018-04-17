@@ -5,6 +5,7 @@ import com.appchana.dos.dao.model.User;
 import com.appchana.dos.domainvalue.OnlineStatus;
 import com.appchana.dos.exception.ConstraintsViolationException;
 import com.appchana.dos.exception.EntityNotFoundException;
+import com.appchana.dos.exception.ForbiddenException;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -70,6 +71,64 @@ public class UserServiceImpl implements UserService
             throw new ConstraintsViolationException(e.getMessage());
         }
         return newUser;
+    }
+
+
+    /**
+     * Updates user.
+     *
+     * @param user
+     * @return
+     * @throws EntityNotFoundException if user is not found
+     * @throws ConstraintsViolationException if a user already exists with the given username
+     */
+    @Override
+    public User update(User user) throws EntityNotFoundException, ConstraintsViolationException
+    {
+        User oldUser = findUserChecked(user.getUserId());
+        try
+        {
+            oldUser.setName(user.getName());
+            oldUser.setSurname(user.getSurname());
+            oldUser.setUserContact(user.getUserContact());
+            oldUser = userRepository.save(oldUser);
+        }
+        catch (DataIntegrityViolationException e)
+        {
+            LOG.warn("Some constraints are thrown due to user creation", e);
+            throw new ConstraintsViolationException(e.getMessage());
+        }
+        return oldUser;
+    }
+
+
+    /**
+     * Updates user's password.
+     *
+     * @param userId, oldPassword, newPassword
+     * @return
+     * @throws EntityNotFoundException if user is not found
+     * @throws ConstraintsViolationException if a user already exists with the given username
+     */
+    @Override
+    public void updatePassword(Long userId, String oldPassword, String newPassword) throws EntityNotFoundException, ForbiddenException, ConstraintsViolationException
+    {
+        User user = findUserChecked(userId);
+        try
+        {
+            if(passwordEncoder.matches(oldPassword, user.getPassword())) {
+                user.setPassword(passwordEncoder.encode(newPassword));
+                userRepository.save(user);
+            }
+            else {
+                throw new ForbiddenException("Incorrect password");
+            }
+        }
+        catch (DataIntegrityViolationException e)
+        {
+            LOG.warn("Some constraints are thrown due to user update", e);
+            throw new ConstraintsViolationException(e.getMessage());
+        }
     }
 
 

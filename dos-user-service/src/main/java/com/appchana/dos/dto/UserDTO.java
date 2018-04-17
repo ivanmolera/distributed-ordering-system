@@ -17,6 +17,8 @@ public class UserDTO {
     private Long userId;
     private String username;
     private String password;
+    private String name;
+    private String surname;
     private Boolean deleted;
     private OnlineStatus onlineStatus;
     private UserContactDTO contact;
@@ -27,10 +29,12 @@ public class UserDTO {
     }
 
 
-    private UserDTO(Long userId, String username, String password, OnlineStatus onlineStatus, Boolean deleted, UserContactDTO contact, List<Long> racquets) {
+    private UserDTO(Long userId, String username, String password, String name, String surname, OnlineStatus onlineStatus, Boolean deleted, UserContactDTO contact, List<Long> racquets) {
         this.userId = userId;
         this.username = username;
         this.password = password;
+        this.name = name;
+        this.surname = surname;
         this.deleted = deleted;
         this.onlineStatus = onlineStatus;
         this.contact = contact;
@@ -47,15 +51,20 @@ public class UserDTO {
         return userId;
     }
 
-    @NotNull(message = "Username can not be null!")
     public String getUsername() {
         return username;
     }
 
-    //@JsonIgnore
-    @NotNull(message = "Password can not be null!")
     public String getPassword() {
         return password;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getSurname() {
+        return surname;
     }
 
     public Boolean getDeleted() {
@@ -78,6 +87,8 @@ public class UserDTO {
         private Long userId;
         private String username;
         private String password;
+        private String name;
+        private String surname;
         private Boolean deleted;
         private OnlineStatus onlineStatus;
         private UserContactDTO contact;
@@ -98,6 +109,18 @@ public class UserDTO {
 
         public UserDTOBuilder setPassword(String password) {
             this.password = password;
+            return this;
+        }
+
+
+        public UserDTOBuilder setName(String name) {
+            this.name = name;
+            return this;
+        }
+
+
+        public UserDTOBuilder setSurname(String surname) {
+            this.surname = surname;
             return this;
         }
 
@@ -127,7 +150,7 @@ public class UserDTO {
 
 
         public UserDTO createUserDTO() {
-            return new UserDTO(userId, username, password, onlineStatus, deleted, contact, racquets);
+            return new UserDTO(userId, username, password, name, surname, onlineStatus, deleted, contact, racquets);
         }
 
     }

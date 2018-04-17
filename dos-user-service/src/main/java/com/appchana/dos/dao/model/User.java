@@ -24,6 +24,8 @@ public class User
     private ZonedDateTime dateCreated = ZonedDateTime.now();
     private String username;
     private String password;
+    private String name;
+    private String surname;
     private Boolean deleted = false;
     private OnlineStatus onlineStatus;
 
@@ -71,7 +73,6 @@ public class User
         this.username = username;
     }
 
-
     @Column(nullable = false)
     @NotNull(message = "Password can not be null!")
     public String getPassword()
@@ -80,6 +81,19 @@ public class User
     }
     public void setPassword(String password) { this.password = password; }
 
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
 
     @Column(nullable = false)
     public Boolean getDeleted()
@@ -90,7 +104,6 @@ public class User
     {
         this.deleted = deleted;
     }
-
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -103,7 +116,6 @@ public class User
         this.onlineStatus = onlineStatus;
     }
 
-
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_contact_id")
     public UserContact getUserContact() {
@@ -112,7 +124,6 @@ public class User
     public void setUserContact(UserContact userContact) {
         this.userContact = userContact;
     }
-
 
     @OneToMany(mappedBy = "user")
     public List<UserRacquet> getUserRacquets() {

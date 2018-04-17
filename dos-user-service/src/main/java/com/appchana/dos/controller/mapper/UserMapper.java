@@ -14,7 +14,11 @@ public class UserMapper
 {
     public static User makeUser(UserDTO userDTO)
     {
-        return new User(userDTO.getUsername(), userDTO.getPassword());
+        User user = new User(userDTO.getUsername(), userDTO.getPassword());
+        user.setUserId(userDTO.getUserId());
+        user.setName(userDTO.getName());
+        user.setSurname(userDTO.getSurname());
+        return user;
     }
 
 
