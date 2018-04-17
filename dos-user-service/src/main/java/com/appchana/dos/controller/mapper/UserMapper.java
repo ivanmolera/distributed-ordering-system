@@ -23,7 +23,8 @@ public class UserMapper
         UserDTO.UserDTOBuilder userDTOBuilder = UserDTO.newBuilder()
                 .setUserId(user.getUserId())
                 .setPassword(user.getPassword())
-                .setUsername(user.getUsername());
+                .setUsername(user.getUsername())
+                .setContact(user.getUserContact());
 
         return userDTOBuilder.createUserDTO();
     }

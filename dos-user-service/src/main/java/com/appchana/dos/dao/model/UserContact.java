@@ -3,15 +3,14 @@ package com.appchana.dos.dao.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 /**
  * Created by ivanmolera on 12/04/2018.
  */
 @Entity
-@Table(name = "contacts")
-public class Contact {
-    private Long contactId;
+@Table(name = "users_contacts")
+public class UserContact {
+    private Long userContactId;
     private String country;
     private String region;
     private String city;
@@ -21,10 +20,10 @@ public class Contact {
 
     private User user;
 
-    public Contact() {
+    public UserContact() {
     }
 
-    public Contact(String country, String region, String city, String postalCode, String address, String phone) {
+    public UserContact(String country, String region, String city, String postalCode, String address, String phone) {
         this.country = country;
         this.region = region;
         this.city = city;
@@ -35,12 +34,12 @@ public class Contact {
 
     @Id
     @GeneratedValue
-    @Column(name = "contact_id")
-    public Long getContactId() {
-        return contactId;
+    @Column(name = "user_contact_id")
+    public Long getUserContactId() {
+        return userContactId;
     }
-    public void setContactId(Long contactId) {
-        this.contactId = contactId;
+    public void setUserContactId(Long userContactId) {
+        this.userContactId = userContactId;
     }
 
 
@@ -92,11 +91,8 @@ public class Contact {
     }
 
 
-    //@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    //@JoinColumn(name = "user_id", nullable = false)
-    //@NotNull(message = "UserId can not be null!")
+    @OneToOne(mappedBy = "userContact")
     @JsonIgnore
-    @OneToOne(mappedBy = "contact")
     public User getUser() {
         return user;
     }

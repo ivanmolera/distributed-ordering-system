@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
  * Created by ivanmolera on 12/04/2018.
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ContactDTO {
+public class UserContactDTO {
     private String country;
     private String region;
     private String city;
@@ -15,11 +15,11 @@ public class ContactDTO {
     private String phone;
 
 
-    private ContactDTO() {
+    private UserContactDTO() {
     }
 
 
-    public ContactDTO(String country, String region, String city, String postalCode, String address, String phone) {
+    public UserContactDTO(String country, String region, String city, String postalCode, String address, String phone) {
         this.country = country;
         this.region = region;
         this.city = city;
@@ -97,8 +97,8 @@ public class ContactDTO {
             return this;
         }
 
-        public ContactDTO createContactDTO() {
-            return new ContactDTO(country, region, city, postalCode, address, phone);
+        public UserContactDTO createContactDTO() {
+            return new UserContactDTO(country, region, city, postalCode, address, phone);
         }
 
     }

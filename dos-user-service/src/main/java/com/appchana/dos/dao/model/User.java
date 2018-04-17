@@ -28,7 +28,7 @@ public class User
     private OnlineStatus onlineStatus;
 
     @OneToOne()
-    private Contact contact;
+    private UserContact userContact;
 
     private List<UserRacquet> userRacquets = new ArrayList<UserRacquet>();
 
@@ -104,14 +104,13 @@ public class User
     }
 
 
-    //@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
-    public Contact getContact() {
-        return contact;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_contact_id")
+    public UserContact getUserContact() {
+        return userContact;
     }
-    public void setContact(Contact contact) {
-        this.contact = contact;
+    public void setUserContact(UserContact userContact) {
+        this.userContact = userContact;
     }
 
 

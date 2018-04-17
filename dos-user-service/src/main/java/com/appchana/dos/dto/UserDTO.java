@@ -1,5 +1,7 @@
 package com.appchana.dos.dto;
 
+import com.appchana.dos.controller.mapper.UserContactMapper;
+import com.appchana.dos.dao.model.UserContact;
 import com.appchana.dos.domainvalue.OnlineStatus;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -15,7 +17,7 @@ public class UserDTO {
     private String username;
     private String password;
     private OnlineStatus onlineStatus;
-    private ContactDTO contact;
+    private UserContactDTO contact;
 
     private List<Long> racquets;
 
@@ -23,7 +25,7 @@ public class UserDTO {
     }
 
 
-    private UserDTO(Long userId, String username, String password, OnlineStatus onlineStatus, ContactDTO contact, List<Long> racquets) {
+    private UserDTO(Long userId, String username, String password, OnlineStatus onlineStatus, UserContactDTO contact, List<Long> racquets) {
         this.userId = userId;
         this.username = username;
         this.password = password;
@@ -57,7 +59,7 @@ public class UserDTO {
         return onlineStatus;
     }
 
-    public ContactDTO getContact() {
+    public UserContactDTO getContact() {
         return contact;
     }
 
@@ -70,7 +72,7 @@ public class UserDTO {
         private String username;
         private String password;
         private OnlineStatus onlineStatus;
-        private ContactDTO contact;
+        private UserContactDTO contact;
         private List<Long> racquets;
 
 
@@ -98,8 +100,8 @@ public class UserDTO {
         }
 
 
-        public UserDTOBuilder setContact(ContactDTO contact) {
-            this.contact = contact;
+        public UserDTOBuilder setContact(UserContact contact) {
+            this.contact = UserContactMapper.makeContactDTO(contact);
             return this;
         }
 
