@@ -5,6 +5,7 @@ import com.appchana.dos.dao.model.UserContact;
 import com.appchana.dos.domainvalue.OnlineStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -14,15 +15,32 @@ import java.util.List;
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserDTO {
+
+    @ApiModelProperty(value = "User unique identifier", dataType = "java.lang.Long", required=true)
     private Long userId;
+
+    @ApiModelProperty(value = "Unique username (an email address)", dataType = "java.lang.String", required=true)
     private String username;
+
+    @ApiModelProperty(value = "User password", dataType = "java.lang.String", required=true)
     private String password;
+
+    @ApiModelProperty(value = "User name", dataType = "java.lang.String", required = false)
     private String name;
+
+    @ApiModelProperty(value = "User surname", dataType = "java.lang.String", required = false)
     private String surname;
+
+    @ApiModelProperty(value = "User status", dataType = "java.lang.String", allowableValues = "true,false", required = false)
     private Boolean deleted;
+
+    @ApiModelProperty(value = "Online status", dataType = "com.appchana.dos.domainvalue.OnlineStatus", allowableValues = "ONLINE, OFFLINE", required = false)
     private OnlineStatus onlineStatus;
+
+    @ApiModelProperty(value = "User contact details", required = true)
     private UserContactDTO contact;
 
+    @ApiModelProperty(value = "User racquets", required = false)
     private List<Long> racquets;
 
     private UserDTO() {
